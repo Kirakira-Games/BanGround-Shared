@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+message Chart {
+    Difficulty difficulty       = 1;
+    int32 level                 = 2;
+    int32 offset                = 3;
+    repeated TimingGroup groups = 4;
+    repeated ValuePoint bpm     = 5;
+    int32 version               = 6;
+}
+
+enum Difficulty {
+    Easy    = 0;
+    Normal  = 1;
+    Hard    = 2;
+    Expert  = 3;
+    Special = 4;
+}
+
+message TimingGroup {
+    repeated Note notes         = 1;
+    repeated TimingPoint points = 2;
+    uint32 flags                = 3;
+}
+
+message Note {
+    NoteType type           = 1;
+    repeated int32 beat     = 2;
+    int32 lane              = 3;
+    int32 tickStack         = 4;
+    repeated NoteAnim anims = 5;
+    float x                 = 6;
+    float y                 = 7;
+    uint32 flags            = 8;
+}
+
+enum NoteType {
+    BPM          = 0;
+    Single       = 1;
+    Flick        = 2;
+    SlideTick    = 3;
+    SlideTickEnd = 4;
+}
+
+message NoteAnim {
+    repeated int32 beat  = 1;
+    TransitionVector pos = 2;
+}
+
+message TransitionVector {
+    TransitionProperty x = 1;
+    TransitionProperty y = 2;
+}
+
+// 原本是泛型 现在只保留float实现
+message TransitionProperty {
+    float value           = 1;
+    Transition transition = 2;
+}
+
+enum Transition {
+    Constant             = 0;
+    Linear               = 1;
+    QuadraticEaseIn      = 2;
+    QuadraticEaseOut     = 3;
+    QuadraticEaseInOut   = 4;
+    CubicEaseIn          = 5;
+    CubicEaseOut         = 6;
+    CubicEaseInOut       = 7;
+    QuarticEaseIn        = 8;
+    QuarticEaseOut       = 9;
+    QuarticEaseInOut     = 10;
+    QuinticEaseIn        = 11;
+    QuinticEaseOut       = 12;
+    QuinticEaseInOut     = 13;
+    SineEaseIn           = 14;
+    SineEaseOut          = 15;
+    SineEaseInOut        = 16;
+    CircularEaseIn       = 17;
+    CircularEaseOut      = 18;
+    CircularEaseInOut    = 19;
+    ExponentialEaseIn    = 20;
+    ExponentialEaseOut   = 21;
+    ExponentialEaseInOut = 22;
+    ElasticEaseIn        = 23;
+    ElasticEaseOut       = 24;
+    ElasticEaseInOut     = 25;
+    BackEaseIn           = 26;
+    BackEaseOut          = 27;
+    BackEaseInOut        = 28;
+    BounceEaseIn         = 29;
+    BounceEaseOut        = 30;
+    BounceEaseInOut      = 31;
+}
+
+message TimingPoint {
+    repeated int32 beat       = 1;
+    TransitionProperty speed  = 2;
+    TransitionColor tap       = 3;
+    TransitionColor tapGrey   = 4;
+    TransitionColor flick     = 5;
+    TransitionColor slideTick = 6;
+    TransitionColor slide     = 7;
+}
+
+message TransitionColor {
+    int32 r               = 1;
+    int32 g               = 2;
+    int32 b               = 3;
+    int32 a               = 4;
+    Transition transition = 5;
+}
+
+message ValuePoint {
+    repeated int32 beat = 1;
+    float value         = 2;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+message cHeader {
+    int32 version                 = 1;
+    int32 sid                     = 2;
+    int32 mid                     = 3;
+    string author                 = 4;
+    string authorNick             = 5;
+    BackgroundFile backgroundFile = 6;
+    repeated float preview        = 7;
+    repeated string tag           = 8;
+}
+
+message BackgroundFile {
+    string pic = 1;
+    string vid = 2;
+}
