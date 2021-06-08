@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message mHeader {
+    int32 mid              = 1;
+    string title           = 2;
+    string artist          = 3;
+    repeated float preview = 4;
+    repeated float bpm     = 5;
+    float length           = 6;
+}
