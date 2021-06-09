@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option csharp_namespace = "V2";
+
 message mHeader {
     int32 mid              = 1;
     string title           = 2;
