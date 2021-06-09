@@ -31,7 +31,6 @@ jobs:
       - name: Install protogen
         run: |
           dotnet tool install --global protobuf-net.Protogen --version 3.0.101
-          dotnet tool restore
 
       - name: Generate C# Code
         run: |
