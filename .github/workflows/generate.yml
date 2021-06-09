@@ -42,7 +42,7 @@ jobs:
         run: |
           git config --local user.email "411937015@qq.com"
           git config --local user.name "GitHub Action"
-          git commit -m "Automated ProtoBuf Code Generation" -a
+          git commit -m "Automated ProtoBuf Code Generation" -a --allow-empty
           
       - name: Push changes to github
         uses: ad-m/github-push-action@master
