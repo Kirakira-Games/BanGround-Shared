@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option csharp_namespace = "V2";
+
 message cHeader {
     int32 version                 = 1;
     int32 sid                     = 2;

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option csharp_namespace = "V2";
+
 message Chart {
     Difficulty difficulty       = 1;
     int32 level                 = 2;
@@ -48,12 +50,12 @@ message NoteAnim {
 }
 
 message TransitionVector {
-    TransitionProperty x = 1;
-    TransitionProperty y = 2;
+    TransitionPropertyFloat x = 1;
+    TransitionPropertyFloat y = 2;
 }
 
 // 原本是泛型 现在只保留float实现
-message TransitionProperty {
+message TransitionPropertyFloat {
     float value           = 1;
     Transition transition = 2;
 }
@@ -95,7 +97,7 @@ enum Transition {
 
 message TimingPoint {
     repeated int32 beat       = 1;
-    TransitionProperty speed  = 2;
+    TransitionPropertyFloat speed  = 2;
     TransitionColor tap       = 3;
     TransitionColor tapGrey   = 4;
     TransitionColor flick     = 5;

@@ -1,3 +1,4 @@
-dotnet protogen --csharp_out=../Generated +names=original .\mHeader.proto
-dotnet protogen --csharp_out=../Generated +names=original .\cHeader.proto
-dotnet protogen --csharp_out=../Generated +names=original .\Chart.proto
+@echo off
+for /f %%a in ('dir /b *.proto') do (
+  dotnet protogen --csharp_out=../Generated/CSharp +names=original %%a
+)
