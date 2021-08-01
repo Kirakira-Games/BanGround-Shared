@@ -202,7 +202,8 @@ namespace V2
     }
 
     [global::ProtoBuf.ProtoContract()]
-    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]\n    public enum Difficulty
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    public enum Difficulty
     {
         Easy = 0,
         Normal = 1,
@@ -212,7 +213,8 @@ namespace V2
     }
 
     [global::ProtoBuf.ProtoContract()]
-    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]\n    public enum NoteType
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    public enum NoteType
     {
         BPM = 0,
         Single = 1,
@@ -222,7 +224,8 @@ namespace V2
     }
 
     [global::ProtoBuf.ProtoContract()]
-    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]\n    public enum Transition
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    public enum Transition
     {
         Constant = 0,
         Linear = 1,
