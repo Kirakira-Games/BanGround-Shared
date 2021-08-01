@@ -35,7 +35,7 @@ jobs:
       - name: Generate C# Code
         run: |
           pushd Proto
-          cmd.exe /c '.\Generate.bat'
+          .\Generate.ps1
           popd
 
       - name: Commit files
