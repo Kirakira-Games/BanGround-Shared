@@ -48,6 +48,7 @@ jobs:
         run: |
           pushd Script
           npm install
+          ls .\node_modules\.bin\
           popd
 
       - name: Generate C# Code
