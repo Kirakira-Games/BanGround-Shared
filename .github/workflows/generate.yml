@@ -31,7 +31,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '15'
       
       - name: Restore cache
         uses: actions/cache@v2
@@ -44,6 +44,12 @@ jobs:
         run: |
           dotnet tool install --global protobuf-net.Protogen --version 3.0.101
 
+      - name: Install ts-proto
+        run: |
+          pushd Script
+          npm install
+          popd
+
       - name: Generate C# Code
         run: |
           pushd Script
@@ -53,7 +59,6 @@ jobs:
       - name: Generate TS Code
         run: |
           pushd Script
-          npm install
           .\Generate_ts.ps1
           popd
 
