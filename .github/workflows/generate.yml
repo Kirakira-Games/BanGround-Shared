@@ -35,7 +35,13 @@ jobs:
       - name: Generate C# Code
         run: |
           pushd Proto
-          .\Generate.ps1
+          .\Generate_csharp.ps1
+          popd
+          
+      - name: Generate JS Code
+        run: |
+          pushd Proto
+          .\Generate_js.ps1
           popd
 
       - name: Commit files
