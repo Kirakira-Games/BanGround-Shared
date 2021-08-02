@@ -224,7 +224,6 @@ namespace V2
     }
 
     [global::ProtoBuf.ProtoContract()]
-    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Transition
     {
         Constant = 0,
