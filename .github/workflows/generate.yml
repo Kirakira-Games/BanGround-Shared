@@ -42,6 +42,7 @@ jobs:
         run: |
           git config --local user.email "411937015@qq.com"
           git config --local user.name "GitHub Action"
+          git config --local core.autocrlf input
           git add --all
           git commit -m "Automated ProtoBuf Code Generation" -a --allow-empty
           
