@@ -1,5 +1,15 @@
 dotnet tool restore
 dotnet protogen --proto_path=.\ --csharp_out=..\Generated\CSharp\ +names=original **/*.proto
+
+$targets = "Language", "Difficulty", "NoteType"
+
 ls ..\Generated\CSharp\*.cs | % {
-  (Get-Content $_.FullName).replace("    public enum ", "    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]`n    public enum ") | Set-Content $_.FullName
+  (cat $_) | % {
+    if ($_ -match "public enum (.*)$" -and $targets.Contains($Matches[1])) {
+      "    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]`n$_"
+    }
+    else {
+      $_
+    }
+  } | Out-File $_
 }
