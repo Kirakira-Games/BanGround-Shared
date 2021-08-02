@@ -10,5 +10,5 @@ ls ..\Generated\CSharp\*.cs | % {
     } else {
       $_
     }
-  } | Out-File $_
+  } | Out-File $_ -Encoding UTF8
 }
