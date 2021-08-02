@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "Chart.proto";
+
+option csharp_namespace = "V2";
+
+message ReplayTouchState {
+  int32 time = 1;
+  int32 touchId = 2;
+  PVector2 screenPos = 3;
+  PVector2 pos = 4;
+  int32 phase = 5;
+}
+
+message PVector2 {
+  float x = 1;
+  float y = 2;
+}
+
+message PVector3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message ReplayFrame {
+  int32 judgeTime = 1;
+  ReplayTouchState events = 2;
+}
+
+message FileChecksum {
+  string file = 1;
+  bytes checksum = 2;
+}
+
+message ReplayFile {
+  uint32 uid = 1;
+  int32 sid = 2;
+  Difficulty difficulty = 3;
+  uint64 mods = 4;
+  repeated FileChecksum checksums = 5;
+  repeated ReplayFrame frames = 6;
+}
