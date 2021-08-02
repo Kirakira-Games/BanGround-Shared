@@ -28,6 +28,18 @@ jobs:
         with:
           dotnet-version: '5.0.x'
 
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: Restore cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+
       - name: Install protogen
         run: |
           dotnet tool install --global protobuf-net.Protogen --version 3.0.101
@@ -38,10 +50,11 @@ jobs:
           .\Generate_csharp.ps1
           popd
           
-      - name: Generate JS Code
+      - name: Generate TS Code
         run: |
           pushd Script
-          .\Generate_js.ps1
+          npm install
+          .\Generate_ts.ps1
           popd
 
       - name: Commit files
