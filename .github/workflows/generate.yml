@@ -34,13 +34,13 @@ jobs:
 
       - name: Generate C# Code
         run: |
-          pushd Proto
+          pushd Script
           .\Generate_csharp.ps1
           popd
           
       - name: Generate JS Code
         run: |
-          pushd Proto
+          pushd Script
           .\Generate_js.ps1
           popd
 
