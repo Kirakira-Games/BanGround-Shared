@@ -1,5 +1,5 @@
 dotnet tool restore
-dotnet protogen --proto_path=.\ --csharp_out=..\Generated\CSharp\ +names=original **/*.proto
+dotnet protogen --proto_path=..\Proto\ --csharp_out=..\Generated\CSharp\ +names=original **/*.proto
 
 $targets = "Language", "Difficulty", "NoteType"
 
