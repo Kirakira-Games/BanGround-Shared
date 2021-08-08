@@ -26,7 +26,7 @@ export interface PVector3 {
 
 export interface ReplayFrame {
   judgeTime: number;
-  events: ReplayTouchState | undefined;
+  events: ReplayTouchState[];
 }
 
 export interface FileChecksum {
@@ -338,11 +338,8 @@ export const ReplayFrame = {
     if (message.judgeTime !== 0) {
       writer.uint32(8).int32(message.judgeTime);
     }
-    if (message.events !== undefined) {
-      ReplayTouchState.encode(
-        message.events,
-        writer.uint32(18).fork()
-      ).ldelim();
+    for (const v of message.events) {
+      ReplayTouchState.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -351,6 +348,7 @@ export const ReplayFrame = {
     const reader = input instanceof Reader ? input : new Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseReplayFrame } as ReplayFrame;
+    message.events = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -358,7 +356,7 @@ export const ReplayFrame = {
           message.judgeTime = reader.int32();
           break;
         case 2:
-          message.events = ReplayTouchState.decode(reader, reader.uint32());
+          message.events.push(ReplayTouchState.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -370,15 +368,16 @@ export const ReplayFrame = {
 
   fromJSON(object: any): ReplayFrame {
     const message = { ...baseReplayFrame } as ReplayFrame;
+    message.events = [];
     if (object.judgeTime !== undefined && object.judgeTime !== null) {
       message.judgeTime = Number(object.judgeTime);
     } else {
       message.judgeTime = 0;
     }
     if (object.events !== undefined && object.events !== null) {
-      message.events = ReplayTouchState.fromJSON(object.events);
-    } else {
-      message.events = undefined;
+      for (const e of object.events) {
+        message.events.push(ReplayTouchState.fromJSON(e));
+      }
     }
     return message;
   },
@@ -386,24 +385,28 @@ export const ReplayFrame = {
   toJSON(message: ReplayFrame): unknown {
     const obj: any = {};
     message.judgeTime !== undefined && (obj.judgeTime = message.judgeTime);
-    message.events !== undefined &&
-      (obj.events = message.events
-        ? ReplayTouchState.toJSON(message.events)
-        : undefined);
+    if (message.events) {
+      obj.events = message.events.map((e) =>
+        e ? ReplayTouchState.toJSON(e) : undefined
+      );
+    } else {
+      obj.events = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<ReplayFrame>): ReplayFrame {
     const message = { ...baseReplayFrame } as ReplayFrame;
+    message.events = [];
     if (object.judgeTime !== undefined && object.judgeTime !== null) {
       message.judgeTime = object.judgeTime;
     } else {
       message.judgeTime = 0;
     }
     if (object.events !== undefined && object.events !== null) {
-      message.events = ReplayTouchState.fromPartial(object.events);
-    } else {
-      message.events = undefined;
+      for (const e of object.events) {
+        message.events.push(ReplayTouchState.fromPartial(e));
+      }
     }
     return message;
   },
