@@ -24,7 +24,7 @@ message PVector3 {
 
 message ReplayFrame {
   int32 judgeTime = 1;
-  ReplayTouchState events = 2;
+  repeated ReplayTouchState events = 2;
 }
 
 message FileChecksum {
